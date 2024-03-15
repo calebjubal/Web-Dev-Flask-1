@@ -9,7 +9,11 @@ def home():
 
 @app.route('/search')
 def search():
-    return render_template('search.html')
+    pokemon_name = request.args.get('pokemon')
+    if pokemon_name:
+        return redirect(url_for('search_pokemon', id_or_name_of_pokemon=pokemon_name))
+    else:
+        return "Please enter a Pokémon name or ID."
 
 @app.route('/search/<id_or_name_of_pokemon>')
 def search_pokemon(id_or_name_of_pokemon):
